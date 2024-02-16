@@ -1,28 +1,21 @@
-import constants as const
 from config import Config
-import os
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 
 
-# from Auth.auth import Authorization
-# from ContactUs.contactUs import ContactForm
-
-
-# WebDrivers configuration using the local storage
-# Class Authorization for processing E2E tests for the Auth module functionality
-
-def execute_tasks(_):
+def execute_tasks():
     try:
         with Config() as bot:
-            bot.land_first_page()
-            bot.close()
-            bot.quit()
+            bot.land_tempmail_page()
+            bot.get_element_copy_button()
+            bot.appy_registration()
+            bot.close_alert_popup()
+            bot.click_on_email()
+            bot.copy_past_code_from_email()
             input("Press enter to finish")
 
     except TimeoutException as e:
         print(f"Error: Timeout Open Login Page: {e}")
+
+
+if __name__ == "__main__":
+    execute_tasks()
